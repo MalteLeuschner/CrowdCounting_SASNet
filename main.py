@@ -58,6 +58,7 @@ class AverageMeter(object):
         self.avg = self.sum / self.count
 
 def main(args):
+    #torch.cuda.empty_cache()
     """the main process of inference"""
     test_loader = prepare_dataset(args)
 
@@ -71,6 +72,7 @@ def main(args):
 
         maes = AverageMeter()
         mses = AverageMeter()
+        cnts = AverageMeter()
         # iterate over the dataset
         for vi, data in enumerate(test_loader, 0):
             img, gt_map = data
@@ -86,16 +88,18 @@ def main(args):
             for i_img in range(pred_map.shape[0]):
                 pred_cnt = np.sum(pred_map[i_img]) / args.log_para
                 gt_count = np.sum(gt_map[i_img])
-
+                cnts.update(pred_cnt)
                 maes.update(abs(gt_count - pred_cnt))
                 mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
         # calculation mae and mre
         mae = maes.avg
         mse = np.sqrt(mses.avg)
+        cnt = cnts.sum
         # print the results
         print('=' * 50)
         print('    ' + '-' * 20)
         print('    [mae %.3f mse %.3f]' % (mae, mse))
+        print('    [Density %.3f]' % cnt)
         print('    ' + '-' * 20)
         print('=' * 50)
 
