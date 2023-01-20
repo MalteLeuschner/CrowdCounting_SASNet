@@ -94,6 +94,15 @@ def main(args):
                 pred_maps.append(pred_map[i_img])
                 maes.update(abs(gt_count - pred_cnt))
                 mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
+                
+                fig = plt.figure(frameon=False)
+                ax = plt.Axes(fig, [0., 0., 1., 1.])
+                ax.set_axis_off()
+                fig.add_axes(ax)
+                ax.imshow(pred_map[i_img], aspect='auto')
+                file = 'heatmap_' + i_img + '.png'
+                fig.savefig('imgs/' + file, bbox_inches='tight', pad_inches=0)
+                
         # calculation mae and mre
         mae = maes.avg
         mse = np.sqrt(mses.avg)
@@ -101,8 +110,8 @@ def main(args):
         print('=' * 50)
         print('    ' + '-' * 20)
         print('    [mae %.3f mse %.3f]' % (mae, mse))
-        print('    [Count ]' + pred_cnts)
-        print('    [Density_maps ]' + pred_maps)
+        print(pred_cnts)
+        print(pred_maps)
         print('    ' + '-' * 20)
         print('=' * 50)
 
