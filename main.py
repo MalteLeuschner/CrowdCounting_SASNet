@@ -20,6 +20,8 @@ from model import SASNet
 import warnings
 import random
 from datasets.loading_data import loading_data
+import matplotlib.pyplot as plt
+
 warnings.filterwarnings('ignore')
 
 # define the GPU id to be used
