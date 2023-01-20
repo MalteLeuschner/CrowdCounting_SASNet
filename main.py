@@ -97,7 +97,6 @@ def main(args):
         # calculation mae and mre
         mae = maes.avg
         mse = np.sqrt(mses.avg)
-        cnt = cnts.sum
         # print the results
         print('=' * 50)
         print('    ' + '-' * 20)
