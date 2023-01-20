@@ -101,8 +101,8 @@ def main(args):
         print('=' * 50)
         print('    ' + '-' * 20)
         print('    [mae %.3f mse %.3f]' % (mae, mse))
-        print('    [Count %.3f]' % pred_cnts)
-        print('    [Density_maps %.3f]' % pred_maps)
+        print('    [Count ]' + pred_cnts)
+        print('    [Density_maps ]' + pred_maps)
         print('    ' + '-' * 20)
         print('=' * 50)
 
