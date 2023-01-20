@@ -72,7 +72,8 @@ def main(args):
 
         maes = AverageMeter()
         mses = AverageMeter()
-        cnts = AverageMeter()
+        pred_cnts = []
+        pred_maps = []
         # iterate over the dataset
         for vi, data in enumerate(test_loader, 0):
             img, gt_map = data
@@ -88,7 +89,9 @@ def main(args):
             for i_img in range(pred_map.shape[0]):
                 pred_cnt = np.sum(pred_map[i_img]) / args.log_para
                 gt_count = np.sum(gt_map[i_img])
-                cnts.update(pred_cnt)
+                
+                pred_cnts.append(pred_cnt)
+                pred_map.append(pred_map[i_img]
                 maes.update(abs(gt_count - pred_cnt))
                 mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
         # calculation mae and mre
@@ -99,7 +102,8 @@ def main(args):
         print('=' * 50)
         print('    ' + '-' * 20)
         print('    [mae %.3f mse %.3f]' % (mae, mse))
-        print('    [Density %.3f]' % cnt)
+        print('    [Count %.3f]' % pred_cnts)
+        print('    [Density_maps %.3f]' % pred_maps)
         print('    ' + '-' * 20)
         print('=' * 50)
 
