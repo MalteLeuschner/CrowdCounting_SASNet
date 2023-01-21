@@ -92,8 +92,9 @@ def main(args):
                 pred_cnt = np.sum(pred_map[i_img]) / args.log_para
                 gt_count = np.sum(gt_map[i_img])
                 
+                den_map = np.squeeze(pred_map[i_img])
                 pred_cnts.append(pred_cnt)
-                pred_maps.append(np.squeeze(pred_map[i_img]))
+                pred_maps.append(den_map)
                 maes.update(abs(gt_count - pred_cnt))
                 mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
                 
@@ -101,7 +102,7 @@ def main(args):
                 ax = plt.Axes(fig, [0., 0., 1., 1.])
                 ax.set_axis_off()
                 fig.add_axes(ax)
-                ax.imshow(pred_map[i_img], aspect='auto')
+                ax.imshow(den_map, aspect='auto')
                 file = 'heatmap_' + i_img + '.png'
                 fig.savefig('imgs/' + file, bbox_inches='tight', pad_inches=0)
                 
