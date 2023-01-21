@@ -103,7 +103,7 @@ def main(args):
                 ax.set_axis_off()
                 fig.add_axes(ax)
                 ax.imshow(den_map, aspect='auto')
-                file = 'heatmap_' + i_img + '.png'
+                file = 'heatmap_' + str(i_img) + '.png'
                 fig.savefig('imgs/' + file, bbox_inches='tight', pad_inches=0)
                 
         # calculation mae and mre
