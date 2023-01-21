@@ -93,7 +93,7 @@ def main(args):
                 gt_count = np.sum(gt_map[i_img])
                 
                 pred_cnts.append(pred_cnt)
-                pred_maps.append(pred_map[i_img])
+                pred_maps.append(np.squeeze(pred_map[i_img]))
                 maes.update(abs(gt_count - pred_cnt))
                 mses.update((gt_count - pred_cnt) * (gt_count - pred_cnt))
                 
