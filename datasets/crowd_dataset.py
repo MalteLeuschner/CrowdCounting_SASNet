@@ -48,8 +48,9 @@ class CrowdDataset(Dataset):
 
         img = torch.Tensor(img)
         target = torch.Tensor(target)
+        name = img_path.split("/")[-1].replace(".jpg", "")
 
-        return img, target
+        return img, target, name
 
 def load_data(img_path):
     # get the path of the ground truth

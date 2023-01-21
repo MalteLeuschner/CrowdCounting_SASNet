@@ -78,7 +78,7 @@ def main(args):
         pred_maps = []
         # iterate over the dataset
         for vi, data in enumerate(test_loader, 0):
-            img, gt_map = data
+            img, gt_map, name = data
 
             img = img.cuda()
             gt_map = gt_map.type(torch.FloatTensor).unsqueeze(0).cuda()
@@ -103,7 +103,7 @@ def main(args):
                 ax.set_axis_off()
                 fig.add_axes(ax)
                 ax.imshow(den_map, aspect='auto')
-                file = 'heatmap_' + str(i_img) + '.png'
+                file = 'heatmap_' + str(name[i_img]) + '.png'
                 fig.savefig('imgs/' + file, bbox_inches='tight', pad_inches=0)
                 
         # calculation mae and mre
