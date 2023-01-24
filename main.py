@@ -114,7 +114,6 @@ def main(args):
         print('    ' + '-' * 20)
         print('    [mae %.3f mse %.3f]' % (mae, mse))
         print(pred_cnts)
-        print(pred_maps)
         print('    ' + '-' * 20)
         print('=' * 50)
 
